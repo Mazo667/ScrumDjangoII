@@ -2,7 +2,7 @@
 <header>
 
     <div class="topnav">
-        <a href="#tareas">Tareas</a>
+        <a href="{% url 'scrum:tareas-lista' %}">Tareas</a>
         <a href="#sprints">Sprints</a>
         {% if user.is_authenticated %}
         <form style="float: right;" method="post" action="{% url 'accounts:logout' %}">

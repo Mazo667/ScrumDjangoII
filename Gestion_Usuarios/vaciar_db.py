@@ -2,7 +2,7 @@ import os
 import django
 
 # Configurar el entorno de Django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ActividadGrupal.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Gestion_Usuarios.settings')
 django.setup()
 
 from django.core.management.base import BaseCommand #Comandos de django para usarlo como el shell

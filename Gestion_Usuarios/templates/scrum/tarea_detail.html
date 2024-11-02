@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="centrar">
+    <div class="container">
+        <p class="titulo-container">{{ tarea.titulo }}</p>
+        <p>{{ tarea.descripcion }}</p>
+        <ul class="lista-tareas">
+            <li><b>Criterios de Aceptacion:</b> {{ tarea.criterios_aceptacion }}</li>
+            <li><b>Prioridad:</b> {{ tarea.prioridad }}</li>
+            <li><b>Estado:</b> {{ tarea.estado }}</li>
+            <li><b>Esfuerzo Estimado:</b> {{ tarea.esfuerzo_estimado }}</li>
+            <li><b>Responsable:</b> {{ tarea.responsable }}</li>
+            <li><b>Sprint Asignado ID:</b> {{ tarea.sprint_asignado.id }}</li>
+            <li><b>Fecha de Creacion:</b> {{ tarea.fecha_de_creacion }}</li>
+            <li><b>Fecha de Actualizacion:</b> {{ tarea.fecha_de_actualizacion }}</li>
+            <li><b>Fecha de Finalizacion:</b> {{ tarea.fecha_de_finalizacion }}</li>
+            <li><b>Dependecias:</b> {{ tarea.dependencias }}</li>
+            <li><b>Bloqueadores:</b> {{ tarea.bloqueadores }}</li>
+        </ul>
+        <a href="{% url 'scrum:tareas-lista' %}">List</a>
+    </div>
+</div>
+
+
+{% endblock %}

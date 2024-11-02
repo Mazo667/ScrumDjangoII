@@ -34,12 +34,13 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #57e1d2;
+    background-color: #b32258;
 }
 
 h1 {
     font-weight: bold;
     font-size: 72px;
+    color: white;
 }
 
 h2 {
@@ -97,6 +98,53 @@ small {
     padding: 1.4em;
 }
 
+.titulo-lista {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.lista-tareas {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tarea-item {
+    margin-bottom: 15px;
+}
+
+/* Estilos de cada tarea */
+.tarea-container {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 3em;
+    margin-left: 3em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarea-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos del título y descripción */
+.tarea-titulo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.tarea-descripcion {
+    font-size: 1em;
+    color: #7f8c8d;
+}
+
+
 form {
     display: flex;
     flex-direction: column; 
@@ -106,7 +154,7 @@ form {
 
 
 .topnav {
-    background-color: #b32258;
+    background-color: #333;
     overflow: hidden;
     color: white;
     padding: 10px 20px;

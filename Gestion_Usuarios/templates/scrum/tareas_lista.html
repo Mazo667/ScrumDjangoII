@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <h2>LISTA DE TAREAS</h2>
-
-{% for tarea in tareas %}
-    <li>
-        <a href="{% url 'scrum:tarea-detalle' %}">
-            <div class="container">
-                <p class="titulo-container">{{ tarea.titulo }}</p>
-                <p>{{ tarea.descripcion }}</p>
-            </div>
-        </a>
-        
-    </li>
-{% endfor %}
-
+<ul class="lista-tareas">
+    {% for tarea in tareas %}
+        <li class="tarea-item">
+            <a href="{% url 'scrum:tarea-detalle' tarea.id %}">
+                <div class="tarea-container">
+                    <p class="tarea-titulo">{{ tarea.titulo }}</p>
+                    <p class="tarea-descripcion">{{ tarea.descripcion }}</p>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
 {% endblock %}
