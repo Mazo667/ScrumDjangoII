@@ -1,0 +1,14 @@
+{% load static %}
+
+<header>
+
+    <div >
+        <!-- Login/Logout links -->
+        {% if user.is_authenticated %}
+            <a href="{% url 'usuarios:cerrar-sesion' %}" role="button">Cerrar Sesion</a>
+        {% else %}
+            <a href="{% url 'usuarios:acceder' %}"  role="button">Iniciar Sesion</a>
+        {% endif %}
+    </div>
+
+</header>
