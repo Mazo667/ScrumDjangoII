@@ -1,13 +1,16 @@
-{% load static %}
 
 <header>
 
-    <div >
-        <!-- Login/Logout links -->
+    <div class="topnav">
+        <a href="#tareas">Tareas</a>
+        <a href="#sprints">Sprints</a>
         {% if user.is_authenticated %}
-            <a href="{% url 'usuarios:cerrar-sesion' %}" role="button">Cerrar Sesion</a>
+        <form style="float: right;" method="post" action="{% url 'accounts:logout' %}">
+            {% csrf_token %}
+            <button class="boton-cerrar-sesion" type="submit">Cerrar Sesión</button>
+        </form>
         {% else %}
-            <a href="{% url 'usuarios:acceder' %}"  role="button">Iniciar Sesion</a>
+            <a href="{% url 'accounts:login' %}"  class="right" role="button">Iniciar Sesion</a>
         {% endif %}
     </div>
 

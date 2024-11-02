@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <p class="titulo-container">Eliminar Tarea</p>
+        <p class="subtitulo-container">Esta seguro que desea eliminar la tarea</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Si</button>
+        </form>
+        <p class="forgot"><a href="{% url 'scrum:tarea-detalle' %}">No llevame de vuelta</a></p>
+    </div>
+    
+{% endblock %}

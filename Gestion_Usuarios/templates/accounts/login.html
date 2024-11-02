@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="centrar">
+        <div class="container">
+            <p class="titulo-container">Iniciar Sesion</p>
+            <form method="post" class="form1">
+                {% csrf_token %}
+                <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" placeholder="Nombre de Usuario" class="username">
+                
+                <input type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" placeholder="Contraseña" class="password">
+        
+                <button type="submit" class="submit">Iniciar Sesion</button>
+
+            </form>
+            <p class="forgot"><a href="{% url 'accounts:register' %}">No tiene cuenta? Registrese</a></p>
+        </div>
+    </div>
+{% endblock %}
