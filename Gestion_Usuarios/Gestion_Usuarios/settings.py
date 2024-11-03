@@ -140,3 +140,5 @@ SESSION_COOKIE_AGE = 300 #El tiempo en segundos que se mantiene la sesion, luego
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True #Limpiar las cookies cuando el usuario cierra el navegador
 
 SESSION_COOKIE_SECURE = True #Si utiliza sesiones basadas en cookies o envía el ID de sesión en una cookie, es una buena idea utilizar cookies seguras en producción
+
+CSRF_COOKIE_SECURE = True # Las cookies CSRF solo se enviarán a través de HTTPS, el token CSRF también solo se enviará a través de conexiones seguras, protegiendo así contra ataques CSRF.
