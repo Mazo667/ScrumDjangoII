@@ -92,6 +92,9 @@ class Epica(models.Model):
                 name='fecha_fin_posterior_epica'
             ),
         ]
+        permissions = [ 
+            ("puede_modificar_epica","Puede modificar epica"),
+        ]
 
 class Tarea(models.Model):
     PRIORIDADES = [
@@ -160,6 +163,7 @@ class Tarea(models.Model):
         ]
         permissions = [ #Agregamos permisos customizados 
             ("puede_completar_tarea","Puede completar tarea"),
+            ("puede_modificar_tarea","Puede modificar tarea")
         ]
 
     def __str__(self):  #Funcion para darle formato cada vez que hagamos un print()

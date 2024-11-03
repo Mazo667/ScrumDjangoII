@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 #from django.utils.decorators import method_decorator #Otra alternativa es method_decorator para proteger nuestras vistas
 from .models import Tarea, Sprint
 from django.shortcuts import render, get_object_or_404, redirect
@@ -56,7 +56,10 @@ class TareaCreateView(LoginRequiredMixin,CreateView):
         return reverse_lazy("scrum:tarea-detalle",kwargs={"pk":self.object.id})
     
 
-class TareaDeleteView(LoginRequiredMixin,DeleteView):
-    model = Tarea
-    template_name = "tarea_confirm_delete.html"
-    success_url = reverse_lazy("scrum:tareas-lista")
+class TareaUpdateView( PermissionRequiredMixin, UpdateView):
+    model = Tarea  # Define el modelo a actualizar
+    template_name = "scrum/tarea_form.html"  # Nombre del template para editar la tarea
+    success_url = reverse_lazy("scrum:tareas-lista")  # URL a la que redirigir después de actualizar
+    permission_required = 'scrum.puede_modificar_tarea'  # Asegúrate de que este permiso exista
+    fields = ['titulo', 'descripcion', 'fecha_de_finalizacion',
+              'estado','responsable','sprint_asignado', 'dependencias', 'bloqueadores'] 

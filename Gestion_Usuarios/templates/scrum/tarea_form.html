@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="centrar">
     <div class="container">
         <p class="titulo-container">Nueva Tarea</p>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Guardar</button>
+            <button type="submit" class="submit">Guardar</button>
+            <a href="{% url 'scrum:tareas-lista' %}">Cancelar</a>
         </form>
     </div>
+</div>
     
 {% endblock %}

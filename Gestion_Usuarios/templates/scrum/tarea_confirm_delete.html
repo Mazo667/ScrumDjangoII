@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="centrar">
     <div class="container">
         <p class="titulo-container">Eliminar Tarea</p>
         <p class="subtitulo-container">Esta seguro que desea eliminar la tarea</p>
@@ -10,5 +11,6 @@
         </form>
         <p class="forgot"><a href="{% url 'scrum:tarea-detalle' %}">No llevame de vuelta</a></p>
     </div>
+</div>
     
 {% endblock %}

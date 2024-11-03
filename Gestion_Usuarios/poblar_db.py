@@ -7,7 +7,7 @@ django.setup()
 
 from django.core.management.base import BaseCommand #Comandos de django para usarlo como el shell
 from scrum.models import Epica, Tarea, Sprint #Los modelos del scrum
-from django.contrib.auth.models import User, Permission #Modelo del usuario y permiso
+from django.contrib.auth.models import User, Permission, Group #Modelo del usuario, permiso y grupo
 
 
 def populate():
@@ -476,8 +476,8 @@ def populate():
     ]
 
     usuarios = [
-        {'username': 'maxi', 'password': 'fava1234', 'first_name': 'Maximiliano', 'last_name': 'Fava', 'email': 'mafava@udc.edu.ar'},
-        {'username': 'emilia', 'password': 'alvarez1234', 'first_name': 'Emilia', 'last_name': 'Alvarez', 'email': 'mealvarez@udc.edu.ar'},
+        {'username': 'maxi', 'password': 'fava1234', 'first_name': 'Maximiliano', 'last_name': 'Fava', 'email': 'mafava@udc.edu.ar'}, #SCRUM MASTER
+        {'username': 'emilia', 'password': 'alvarez1234', 'first_name': 'Emilia', 'last_name': 'Alvarez', 'email': 'mealvarez@udc.edu.ar'}, #PRODUCT OWNER
         {'username': 'marce', 'password': 'delgado1234', 'first_name': 'Marcela', 'last_name': 'Delgado', 'email': 'madelgado1@udc.edu.ar'},
         {'username': 'jessi', 'password': 'loureiro1234', 'first_name': 'Jessica', 'last_name': 'Loureiro', 'email': 'madelgado1@udc.edu.ar'},
         {'username': 'lucia', 'password': 'delgado1234', 'first_name': 'Lucía', 'last_name': 'Gómez', 'email': 'lucia.gomez@gmail.com'},
@@ -621,15 +621,44 @@ def populate():
     epica_para_asignar = Epica.objects.get(id=1)
     epica_por_asignar.dependencias.add(epica_para_asignar) #Asigno la epica 1 como una dependencia de la 3
 
-    #Agrego a los usuarios el permiso de completar tareas
     try:
+        # Crear o obtener el grupo 'equipo de desarrolladores'
+        equipo_desarrolladores, created = Group.objects.get_or_create(name='equipo de desarrolladores')
+
+        # Asignar permiso a los usuarios y agregarlos al grupo
         permiso = Permission.objects.get(codename="puede_completar_tarea") 
         for usuario in usuarios:
             usuario.user_permissions.add(permiso)  # Agregar el permiso al usuario
-            print(f"Permiso '{permiso.name}' otorgado a {usuario.username}.")
-    except Permission.DoesNotExist:
-        print("El permiso no existe.")
+            equipo_desarrolladores.user_set.add(usuario)  # Agregar el usuario al grupo
+            print(f"Permiso '{permiso.name}' otorgado a {usuario.username} y agregado al grupo '{equipo_desarrolladores.name}'.")
 
+        # Agrego al scrum master el permiso de modificar tareas
+        try:
+            permiso2 = Permission.objects.get(codename="puede_modificar_tarea") 
+            scrum_master = User.objects.get(pk=1)  # Asegúrate de que este ID sea correcto
+            scrum_master.user_permissions.add(permiso2)
+            print(f"Permiso '{permiso2.name}' otorgado a {scrum_master.username}.")
+            
+            # Agregar el scrum master al grupo si no está ya
+            equipo_desarrolladores.user_set.add(scrum_master)
+            
+        except Permission.DoesNotExist:
+            print("El permiso 'puede_modificar_tarea' no existe.")
+
+        # Agrego al product owner el permiso de modificar épicas
+        try:
+            permiso3 = Permission.objects.get(codename="puede_modificar_epica") 
+            product_owner = User.objects.get(pk=2)
+            product_owner.user_permissions.add(permiso3)
+            print(f"Permiso '{permiso3.name}' otorgado a {product_owner.username}.")
+            
+            # Agregar el product owner al grupo si no está ya
+            equipo_desarrolladores.user_set.add(product_owner)
+
+        except Permission.DoesNotExist:
+            print("El permiso 'puede_modificar_epica' no existe.")
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
 
 if __name__ == '__main__':
     populate()

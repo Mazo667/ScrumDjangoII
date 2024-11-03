@@ -9,4 +9,5 @@ urlpatterns = [
    path("sprints/",views.SprintListView.as_view(),name="sprints-lista"),
    path("sprint/<int:pk>/",views.SprintDetailView.as_view(),name="sprint-detalle"),
    path('tarea/completar/<int:tarea_id>/', views.completar_tarea, name='completar-tarea'),
+   path('tarea/modificar/<int:pk>/', views.TareaUpdateView.as_view(), name='modificar-tarea'),
 ]

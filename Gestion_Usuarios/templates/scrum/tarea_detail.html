@@ -20,6 +20,9 @@
         </ul>
         <a href="{% url 'scrum:tareas-lista' %}">Volver a la Lista</a>
         <a href="{% url 'scrum:completar-tarea' tarea.id %}">Completar Tarea</a>
+        {% if user.id == 1 %} <!-- Si el usuario es el SCRUM MASTER puede eliminar la tarea -->
+            <a href="{% url 'scrum:modificar-tarea' tarea.id %}">Modificar Tarea</a>
+        {% endif %}
     </div>
 </div>
 
