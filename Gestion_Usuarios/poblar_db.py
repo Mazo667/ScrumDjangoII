@@ -7,7 +7,7 @@ django.setup()
 
 from django.core.management.base import BaseCommand #Comandos de django para usarlo como el shell
 from scrum.models import Epica, Tarea, Sprint #Los modelos del scrum
-from django.contrib.auth.models import User #Modelo del usuario
+from django.contrib.auth.models import User, Permission #Modelo del usuario y permiso
 
 
 def populate():
@@ -196,7 +196,7 @@ def populate():
         "fecha_de_finalizacion" : None,
         'esfuerzo_estimado': 5,
         'bloqueadores': '',
-        'responsable_id': 9,
+        'responsable_id': 8,
         'sprint_asignado_id': 1
     },
     {
@@ -209,7 +209,7 @@ def populate():
         "fecha_de_finalizacion" : None,
         'esfuerzo_estimado': 5,
         'bloqueadores': 'El uso de dispositivos moviles todavia no esta implementado el media query',
-        'responsable_id': 10,
+        'responsable_id': 6,
         'sprint_asignado_id': 1
     },
     {
@@ -443,7 +443,7 @@ def populate():
       "fecha_de_finalizacion" : None,
       "esfuerzo_estimado": 4,
       "bloqueadores": "",
-      "responsable_id": 9,
+      "responsable_id": 5,
       "sprint_asignado_id": 3
    },
    {
@@ -456,7 +456,7 @@ def populate():
       "fecha_de_finalizacion" : None,
       "esfuerzo_estimado": 6,
       "bloqueadores": "",
-      "responsable_id": 10,
+      "responsable_id": 7,
       "sprint_asignado_id": 3
    },
    {
@@ -469,12 +469,35 @@ def populate():
       "fecha_de_finalizacion" : None,
       "esfuerzo_estimado": 5,
       "bloqueadores": "",
-      "responsable_id": 11,
+      "responsable_id": 8,
       "sprint_asignado_id": 3
    }
      
     ]
 
+    usuarios = [
+        {'username': 'maxi', 'password': 'fava1234', 'first_name': 'Maximiliano', 'last_name': 'Fava', 'email': 'mafava@udc.edu.ar'},
+        {'username': 'emilia', 'password': 'alvarez1234', 'first_name': 'Emilia', 'last_name': 'Alvarez', 'email': 'mealvarez@udc.edu.ar'},
+        {'username': 'marce', 'password': 'delgado1234', 'first_name': 'Marcela', 'last_name': 'Delgado', 'email': 'madelgado1@udc.edu.ar'},
+        {'username': 'jessi', 'password': 'loureiro1234', 'first_name': 'Jessica', 'last_name': 'Loureiro', 'email': 'madelgado1@udc.edu.ar'},
+        {'username': 'lucia', 'password': 'delgado1234', 'first_name': 'Lucía', 'last_name': 'Gómez', 'email': 'lucia.gomez@gmail.com'},
+        {'username': 'martin', 'password': 'delgado1234', 'first_name': 'Martín', 'last_name': 'Fernández', 'email': 'martin.fernandez@gmail.com'},
+        {'username': 'maria', 'password': 'delgado1234', 'first_name': 'María', 'last_name': 'López', 'email': 'maria.lopez@yahoo.com'},
+        {'username': 'agus', 'password': 'delgado1234', 'first_name': 'Agustín', 'last_name': 'Rodríguez', 'email': 'agustin.rodriguez@hotmail.com'},
+    ]
+
+    for data in usuarios:
+        # Crear el usuario
+        user = User.objects.create_user(
+            username=data['username'],
+            password=data['password'],
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            email=data['email']
+        )
+        print(f'Usuario {user.username} creado correctamente.')
+    
+    
     usuarios = User.objects.exclude(is_superuser=True) #Todos los usuarios excepto el admin
 
    # autores = [
@@ -597,6 +620,16 @@ def populate():
     epica_por_asignar = Epica.objects.get(id=3)
     epica_para_asignar = Epica.objects.get(id=1)
     epica_por_asignar.dependencias.add(epica_para_asignar) #Asigno la epica 1 como una dependencia de la 3
+
+    #Agrego a los usuarios el permiso de completar tareas
+    try:
+        permiso = Permission.objects.get(codename="puede_completar_tarea") 
+        for usuario in usuarios:
+            usuario.user_permissions.add(permiso)  # Agregar el permiso al usuario
+            print(f"Permiso '{permiso.name}' otorgado a {usuario.username}.")
+    except Permission.DoesNotExist:
+        print("El permiso no existe.")
+
 
 if __name__ == '__main__':
     populate()

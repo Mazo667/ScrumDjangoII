@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="centrar">
+        <div class="container">
+            <p class="titulo-container">¿Estás seguro de que quieres completar la tarea "{{ tarea.titulo }}"?</p>
+            <form method="post" class="form1">
+                {% csrf_token %}
+        
+                <button type="submit" class="submit">Sí, completar tarea</button>
+                <a href="{% url 'scrum:tareas-lista' %}">Cancelar</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

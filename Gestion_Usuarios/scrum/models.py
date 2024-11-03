@@ -158,6 +158,9 @@ class Tarea(models.Model):
                 name='fecha_finalizacion_tarea'
             ), #Constraint de mejora, si una tarea esta completada fecha de finalizacion puede tener un valor valido no null.
         ]
+        permissions = [ #Agregamos permisos customizados 
+            ("puede_completar_tarea","Puede completar tarea"),
+        ]
 
     def __str__(self):  #Funcion para darle formato cada vez que hagamos un print()
         return f"Tarea: {self.estado} - Prioridad: {self.prioridad} - Esfuerzo: {self.esfuerzo_estimado} - Responsable: {self.responsable}"

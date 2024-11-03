@@ -1,11 +1,12 @@
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.contrib.auth.decorators import login_required #Decorador para funciones basadas en vistas
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 #from django.utils.decorators import method_decorator #Otra alternativa es method_decorator para proteger nuestras vistas
 from .models import Tarea, Sprint
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 
 
 @login_required
@@ -13,6 +14,15 @@ def tareas_por_usuario(request):
     tareas = Tarea.objects.filter(responsable=request.user.id)
     return render(request,'scrum/tareas_lista.html', {'tareas':tareas})
 
+@permission_required('scrum.puede_completar_tarea')
+def completar_tarea(request,tarea_id):
+    tarea = get_object_or_404(Tarea,id=tarea_id)
+    if request.method == 'POST':
+        tarea.estado = 'COMPLETADA'
+        tarea.save()
+        messages.success(request, 'Tarea completada con exito')
+        return redirect('scrum:tareas-lista')
+    return render(request,'scrum/confirmar_completar_tarea.html', {'tarea':tarea})
 
 #@method_decorator(login_required, name='dispatch') #se utiliza para aplicar el decorador login_required a vistas basadas en clases
 class TareaListView(LoginRequiredMixin,ListView):

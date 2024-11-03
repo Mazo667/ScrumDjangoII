@@ -19,6 +19,7 @@
             <li>Bloqueadores: {{ tarea.bloqueadores }}</li>
         </ul>
         <a href="{% url 'scrum:tareas-lista' %}">Volver a la Lista</a>
+        <a href="{% url 'scrum:completar-tarea' tarea.id %}">Completar Tarea</a>
     </div>
 </div>
 
