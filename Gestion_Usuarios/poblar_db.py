@@ -59,7 +59,7 @@ def populate():
         'fecha_inicio':'2024-01-01',
         'fecha_fin':'2024-01-15',
         'velocidad':'20',
-        'scrum_master_id':'3' 
+        'scrum_master_id':'1' 
     },
     {
         'id': 2,
@@ -68,7 +68,7 @@ def populate():
         'fecha_inicio':'2024-02-01',
         'fecha_fin':'2024-02-15',
         'velocidad':'25', 
-        'scrum_master_id':'3' 
+        'scrum_master_id':'1' 
     },
     {
         'id': 3,
@@ -77,7 +77,7 @@ def populate():
         'fecha_inicio':'2024-03-01',
         'fecha_fin':'2024-03-15',
         'velocidad':'22', 
-        'scrum_master_id':'3' 
+        'scrum_master_id':'1' 
     },
     ]
 
@@ -261,7 +261,7 @@ def populate():
         "fecha_de_finalizacion" : None,
         "esfuerzo_estimado": 4,
         "bloqueadores": "Esperando aprobación de las herramientas de compresión.",
-        "responsable_id": 2,
+        "responsable_id": 1,
         "sprint_asignado_id": 2
     },
     {
@@ -313,7 +313,7 @@ def populate():
         "fecha_de_finalizacion" : None,
         "esfuerzo_estimado": 5,
         "bloqueadores": "Esperando validación de las opciones de la API.",
-        "responsable_id": 2,
+        "responsable_id": 1,
         "sprint_asignado_id": 2
     },
     {
@@ -378,7 +378,7 @@ def populate():
        "fecha_de_finalizacion" : None,
         'esfuerzo_estimado': 6,
         'bloqueadores': '',
-        'responsable_id': 4,
+        'responsable_id': 1,
         'sprint_asignado_id': 3
     },
     {
@@ -430,7 +430,7 @@ def populate():
        "fecha_de_finalizacion" : None,
        "esfuerzo_estimado" : 8,
        "bloqueadores" : "Necesita revisión del código existente.",
-       "responsable_id" : 8,
+       "responsable_id" : 1,
        "sprint_asignado_id" : 3
    },
    {

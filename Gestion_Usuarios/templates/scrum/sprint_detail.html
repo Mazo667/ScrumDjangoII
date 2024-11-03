@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="centrar">
+    <div class="container">
+        <p class="titulo-container">{{ sprint.nombre }}</p>
+        <p>{{ sprint.objetivo }}</p>
+        <ul class="lista-tareas">
+            <li>Fecha de Inicio: {{ sprint.fecha_inicio }}</li>
+            <li>Fecha de Fin: {{ sprint.fecha_fin }}</li>
+            <li>Velocidad: {{ sprint.velocidad }}</li>
+            <li>Scrum Master: {{ sprint.scrum_master }}</li>
+            <li>Equipo de Desarrollo: {{ sprint.equipo_de_desarrollo }}</li>
+            <li>Backlog Sprint: {{ sprint.backlog_sprint }}</li>
+        </ul>
+        <a href="{% url 'scrum:sprints-lista' %}">Volver a la Lista</a>
+    </div>
+</div>
+
+
+{% endblock %}

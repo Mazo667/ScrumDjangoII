@@ -8,13 +8,13 @@
 
 @font-face {
     font-family: 'Poppins';
-    src: url('../fonts/Roboto/Poppins-Italic.ttf') format('truetype');
+    src: url('../fonts/Poppins-Italic.ttf') format('truetype');
     font-style: italic;
 }
 
 @font-face {
     font-family: 'Poppins';
-    src: url('../fonts/Roboto/Poppins-Bold.ttf') format('truetype');
+    src: url('../fonts/Poppins-Bold.ttf') format('truetype');
     font-style: bold;
 }
 
@@ -49,6 +49,15 @@ h2 {
     text-align: center;
     color: white;
 }
+
+a {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #b32258;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
 
 small {
     font-family: 'Poppins', sans-serif;
@@ -99,7 +108,7 @@ small {
 }
 
 .titulo-lista {
-    font-size: 2em;
+    font-size: 1.2em;
     text-align: center;
     margin-bottom: 20px;
     color: #333;
@@ -238,11 +247,5 @@ form.form1 {
         padding-top: 15px;
     }
     
-    a {
-        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-        color: #b32258;
-        text-decoration: none;
-        font-family: 'Poppins', sans-serif;
-    }
-    
+
         

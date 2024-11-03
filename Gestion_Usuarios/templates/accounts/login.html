@@ -7,7 +7,7 @@
             <form method="post" class="form1">
                 {% csrf_token %}
                 <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" placeholder="Nombre de Usuario" class="username">
-                
+
                 <input type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" placeholder="Contraseña" class="password">
         
                 <button type="submit" class="submit">Iniciar Sesion</button>

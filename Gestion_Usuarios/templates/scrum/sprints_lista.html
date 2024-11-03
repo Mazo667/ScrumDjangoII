@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>LISTA DE SPRINTS</h2>
+<ul class="lista-tareas">
+    {% for sprint in sprints %}
+        <li class="tarea-item">
+            <a href="{% url 'scrum:sprint-detalle' sprint.id %}">
+                <div class="tarea-container">
+                    <p class="tarea-titulo">{{ sprint.nombre }}</p>
+                    <p class="tarea-descripcion">{{ sprint.objetivo }}</p>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

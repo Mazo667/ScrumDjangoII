@@ -2,9 +2,9 @@
 <header>
 
     <div class="topnav">
-        <a href="{% url 'scrum:tareas-lista' %}">Tareas</a>
-        <a href="#sprints">Sprints</a>
         {% if user.is_authenticated %}
+        <a href="{% url 'scrum:tareas-lista' %}">Tareas</a>
+        <a href="{% url 'scrum:sprints-lista' %}">Sprints</a>
         <form style="float: right;" method="post" action="{% url 'accounts:logout' %}">
             {% csrf_token %}
             <button class="boton-cerrar-sesion" type="submit">Cerrar Sesión</button>

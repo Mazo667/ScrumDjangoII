@@ -129,6 +129,14 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "scrum:tareas-lista"
+LOGIN_REDIRECT_URL = "scrum:tareas-lista" #Una vez que hemos iniciado sesion nos llevara a esta vista
 
-LOGOUT_REDIRECT_URL = "accounts:login"
+LOGOUT_REDIRECT_URL = "accounts:login" #Cuando cerremos sesion, nos llevara a la vista de inicio de sesion
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache" #El backend de cache reducira la latencia y uso de la base de datos
+
+SESSION_COOKIE_AGE = 300 #El tiempo en segundos que se mantiene la sesion, luego se cerrara la sesion
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True #Limpiar las cookies cuando el usuario cierra el navegador
+
+SESSION_COOKIE_SECURE = True #Si utiliza sesiones basadas en cookies o envía el ID de sesión en una cookie, es una buena idea utilizar cookies seguras en producción

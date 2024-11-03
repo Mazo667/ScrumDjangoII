@@ -1,20 +1,40 @@
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.contrib.auth.decorators import login_required #Decorador para funciones basadas en vistas
+from django.contrib.auth.mixins import LoginRequiredMixin
+#from django.utils.decorators import method_decorator #Otra alternativa es method_decorator para proteger nuestras vistas
+from .models import Tarea, Sprint
+from django.shortcuts import render
 
-from .models import Tarea
 
-class TareaListView(ListView):
+@login_required
+def tareas_por_usuario(request):
+    tareas = Tarea.objects.filter(responsable=request.user.id)
+    return render(request,'scrum/tareas_lista.html', {'tareas':tareas})
+
+
+#@method_decorator(login_required, name='dispatch') #se utiliza para aplicar el decorador login_required a vistas basadas en clases
+class TareaListView(LoginRequiredMixin,ListView):
     model = Tarea
     template_name = "scrum/tareas_lista.html"
     context_object_name = "tareas"
 
+class SprintListView(LoginRequiredMixin,ListView):
+    model = Sprint
+    template_name = "scrum/sprints_lista.html"
+    context_object_name = "sprints"    
 
-class TareaDetailView(DetailView):
+class SprintDetailView(LoginRequiredMixin,DetailView):
+    model = Sprint
+    context_object_name = "sprint"
+
+class TareaDetailView(LoginRequiredMixin,DetailView):
     model = Tarea
     context_object_name = "tarea"
 
-class TareaCreateView(CreateView):
+
+class TareaCreateView(LoginRequiredMixin,CreateView):
     model = Tarea
     template_name = "scrum/tarea_detalle.html"
     fields = ["prioridad","titulo","descripcion","estado",
@@ -26,7 +46,7 @@ class TareaCreateView(CreateView):
         return reverse_lazy("scrum:tarea-detalle",kwargs={"pk":self.object.id})
     
 
-class TareaDeleteView(DeleteView):
+class TareaDeleteView(LoginRequiredMixin,DeleteView):
     model = Tarea
     template_name = "tarea_confirm_delete.html"
     success_url = reverse_lazy("scrum:tareas-lista")
