@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from .models import Tarea, Sprint
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from .forms import TareaForm
 
 
 @login_required
@@ -57,9 +58,8 @@ class TareaCreateView(LoginRequiredMixin,CreateView):
     
 
 class TareaUpdateView( PermissionRequiredMixin, UpdateView):
-    model = Tarea  # Define el modelo a actualizar
-    template_name = "scrum/tarea_form.html"  # Nombre del template para editar la tarea
-    success_url = reverse_lazy("scrum:tareas-lista")  # URL a la que redirigir después de actualizar
-    permission_required = 'scrum.puede_modificar_tarea'  # Asegúrate de que este permiso exista
-    fields = ['titulo', 'descripcion', 'fecha_de_finalizacion',
-              'estado','responsable','sprint_asignado', 'dependencias', 'bloqueadores'] 
+    model = Tarea 
+    template_name = "scrum/tarea_form.html"  
+    success_url = reverse_lazy("scrum:tareas-lista") 
+    permission_required = 'scrum.puede_modificar_tarea'  
+    form_class = TareaForm
